@@ -83,7 +83,7 @@ const validateSignature = async (keys, token) => {
       0x30, Buffer.concat([BufToDER(0x2, Buffer.from(key.n, 'base64')), BufToDER(0x2, Buffer.from(key.e, 'base64'))])
     ).toString('base64'),
     '-----END RSA PUBLIC KEY-----',
-  ].join('\n');
+  ].join(String.fromCharCode(10));
   const pubkey = crypto.createPublicKey(encodedKey, 'der', 'pkcs1');
   const verifyFunction = crypto.createVerify('RSA-SHA256');
   verifyFunction.write(headerPart + '.' + payloadPart);
